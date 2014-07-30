@@ -5,8 +5,21 @@ namespace Sk;
 use Psr\Log\AbstractLogger;
 use Psr\Log\LoggerInterface;
 
+/**
+ * DbLogger
+ */
 class DbLogger extends AbstractLogger implements LoggerInterface
 {
+
+    /**
+     * getPdo
+     *
+     * @return object pdo instance
+     */
+    public function getPdo()
+    {
+
+    }
 
     /**
      * Logs with an arbitrary level.
@@ -14,10 +27,10 @@ class DbLogger extends AbstractLogger implements LoggerInterface
      * @param mixed $level
      * @param string $message
      * @param array $context
-     * @return null
+     * @return boolean
      */
     public function log($level, $message, array $context = array())
     {
-        
+        return true;
     }
 }
