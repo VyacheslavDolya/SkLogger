@@ -1,25 +1,30 @@
 <?php
 
-namespace Sk\Model;
+namespace SkLogger\Dao;
 
 /**
- * PdoContainer
+ * PDO Provider class.
+ *
+ * @package SkLogger
+ * @subpackage PdoContainer
+ * @author Vyacheslav Dolya <vyacheslav.dolya@gmail.com>
  */
 class PdoContainer
 {
     /**
-     * $pdo
+     * PDO instance container
      *
      * @var object
+     * @access private
      */
-    protected $pdo;
+    private $pdo;
 
     /**
-     * Construct
+     * Constructor
      *
-     * @param string $pdoDsn
-     * @param string $pdoLogin
-     * @param string $pdoPass
+     * @param string $pdoDsn   Driver invocation.
+     * @param string $pdoLogin User Name.
+     * @param string $pdoPass  Password.
      */
     public function __construct($pdoDsn, $pdoLogin, $pdoPass)
     {
@@ -27,7 +32,7 @@ class PdoContainer
     }
 
     /**
-     * exec
+     * Execute sql query.
      *
      * @param string $sql
      * @param array $placeholders
@@ -38,6 +43,10 @@ class PdoContainer
     {
         if (!is_string($sql)) {
             throw new \InvalidArgumentException('Provided SQL not a string');
+        }
+
+        if (empty($sql)) {
+            throw new \InvalidArgumentException('Provided SQL is empty');
         }
 
         $statement = $this->pdo->prepare($sql);
